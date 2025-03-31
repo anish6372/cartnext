@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 
 import { addToCart } from "../../slices/cartSlice";
 import Layout from "../../components/Layout";
@@ -61,7 +61,7 @@ const ProductDetails = () => {
               src={product.image}
               alt={product.title}
               className="h-96 w-full object-contain"
-              loading="lazy" 
+              loading="lazy"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
@@ -93,8 +93,8 @@ const ProductDetails = () => {
               <li>✅ All taxes included</li>
             </ul>
 
-            
-            <div className="flex items-center gap-4 mb-4">
+          
+            <div className="flex flex-wrap items-center gap-4 mb-4">
               <motion.button
                 onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
                 className="px-4 py-2 bg-gray-200 text-gray-700 rounded"
@@ -114,7 +114,7 @@ const ProductDetails = () => {
               </motion.button>
               <motion.button
                 onClick={handleAddToCart}
-                className="px-40 py-2 bg-amber-100 text-black rounded"
+                className="px-6 py-2 bg-amber-100 text-black rounded w-full sm:w-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -124,14 +124,14 @@ const ProductDetails = () => {
 
             
             <motion.div
-              className="flex gap-4 mb-4"
+              className="flex flex-wrap gap-4 mb-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
               <motion.button
                 onClick={handleBuyNow}
-                className="px-60 py-2 bg-red-500 text-white rounded"
+                className="px-6 py-2 bg-red-500 text-white rounded w-full sm:w-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -140,7 +140,7 @@ const ProductDetails = () => {
             </motion.div>
 
            
-            <div className="flex gap-6 text-gray-600 text-sm">
+            <div className="flex flex-wrap gap-6 text-gray-600 text-sm">
               <motion.div
                 className="flex items-center gap-2 cursor-pointer"
                 whileHover={{ scale: 1.1 }}
@@ -166,14 +166,14 @@ const ProductDetails = () => {
           </motion.div>
         </div>
 
-        {/* Tabs Section */}
+     
         <motion.div
           className="mt-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex space-x-4 border-b pb-2 mb-4">
+          <div className="flex flex-wrap space-x-4 border-b pb-2 mb-4">
             <button
               className={`text-sm font-semibold ${
                 activeTab === "description" ? "text-black border-b-2 border-black" : "text-gray-500"
@@ -212,7 +212,7 @@ const ProductDetails = () => {
                   information about the product, including its features, benefits, and usage.
                 </p>
               </div>
-              <div className="flex items-center justify-center border rounded-lg h-40 w-100 bg-gray-100">
+              <div className="flex items-center justify-center border rounded-lg h-40 w-full md:w-100 bg-gray-100">
                 <button className="text-4xl text-gray-500">
                   <FaPlay />
                 </button>

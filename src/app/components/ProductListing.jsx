@@ -63,7 +63,7 @@ const ProductListing = () => {
           <h1 className="text-2xl font-bold mb-4 mt-6 text-center">Product Listing</h1>
           <div className="flex flex-wrap gap-4 mb-4 justify-center">
             <select
-              className="p-2 border"
+              className="p-2 border rounded w-full sm:w-auto"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
@@ -74,7 +74,7 @@ const ProductListing = () => {
               ))}
             </select>
             <select
-              className="p-2 border"
+              className="p-2 border rounded w-full sm:w-auto"
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
             >
@@ -83,7 +83,7 @@ const ProductListing = () => {
             </select>
           </div>
 
-          {/* Product Grid with Animation */}
+         
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             initial={{ opacity: 0 }}
@@ -107,14 +107,14 @@ const ProductListing = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 />
-                <h2 className="text-lg font-semibold">{product.title}</h2>
+                <h2 className="text-lg font-semibold truncate">{product.title}</h2>
                 <p className="text-gray-600">${product.price}</p>
               </motion.div>
             ))}
           </motion.div>
 
         
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center mt-4 flex-wrap gap-2">
             {Array.from({ length: totalPages }, (_, index) => (
               <motion.button
                 key={index + 1}

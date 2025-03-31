@@ -8,16 +8,15 @@ import { useState, useEffect } from "react";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.items);
-  const discount = useSelector((state) => state.cart.discount); 
+  const discount = useSelector((state) => state.cart.discount);
   const dispatch = useDispatch();
 
-  const [tempCart, setTempCart] = useState([]); 
+  const [tempCart, setTempCart] = useState([]);
 
   useEffect(() => {
-    setTempCart([...cart]); 
+    setTempCart([...cart]);
   }, [cart]);
 
-  
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const total = subtotal - (subtotal * discount) / 100;
   const freeShippingThreshold = 50;
@@ -41,7 +40,7 @@ const Cart = () => {
   };
 
   const handleUpdateCart = () => {
-    dispatch(updateCart(tempCart)); 
+    dispatch(updateCart(tempCart));
   };
 
   const handleClearCart = () => {
@@ -64,8 +63,6 @@ const Cart = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          
-
          
           <div className="border-b py-2 text-red-500 text-sm">
             Add <span className="font-bold">${remainingAmount.toFixed(2)}</span> to cart and get free shipping
@@ -80,24 +77,24 @@ const Cart = () => {
             </div>
           </div>
 
-         
-          <div className="grid grid-cols-5 text-gray-600 font-semibold border-b py-2 mt-4">
+   
+          <div className="grid grid-cols-5 text-gray-600 font-semibold border-b py-2 mt-4 hidden sm:grid">
             <p className="col-span-2">Products</p>
             <p>Price</p>
             <p className="text-center">Quantity</p>
             <p className="text-center">Subtotal</p>
           </div>
 
-         
+       
           {tempCart.map((item) => (
             <motion.div
               key={item.id}
-              className="grid grid-cols-5 items-center border-b py-4"
+              className="grid grid-cols-1 sm:grid-cols-5 items-center border-b py-4 gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              
+            
               <div className="flex items-center col-span-2 gap-4">
                 <motion.img
                   src={item.image || "/images/placeholder.png"}
@@ -107,11 +104,11 @@ const Cart = () => {
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                 />
-                <p className="font-semibold">{item.title}</p>
+                <p className="font-semibold text-sm sm:text-base">{item.title}</p>
               </div>
 
              
-              <p className="text-gray-600">
+              <p className="text-gray-600 hidden sm:block">
                 <span className="line-through text-gray-400">${item.originalPrice}</span>{' '}
                 <span className="text-black font-bold">${item.price}</span>
               </p>
@@ -138,9 +135,9 @@ const Cart = () => {
               </div>
 
              
-              <p className="font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+              <p className="font-semibold hidden sm:block">${(item.price * item.quantity).toFixed(2)}</p>
 
-              
+             
               <motion.button
                 onClick={() => handleRemove(item.id)}
                 className="text-red-500 font-bold text-center"
@@ -152,16 +149,16 @@ const Cart = () => {
             </motion.div>
           ))}
 
-         
-          <div className="flex mt-4 gap-4">
+          
+          <div className="flex flex-wrap mt-4 gap-4">
             <input
               type="text"
               placeholder="Coupon Code"
-              className="flex-grow p-2 border rounded"
+              className="flex-grow p-2 border rounded w-full sm:w-auto"
             />
             <motion.button
               onClick={() => handleApplyCoupon("roiser20")}
-              className="px-4 py-2 bg-black text-white rounded"
+              className="px-4 py-2 bg-black text-white rounded w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -169,7 +166,7 @@ const Cart = () => {
             </motion.button>
             <motion.button
               onClick={handleUpdateCart}
-              className="px-4 py-2 bg-blue-500 text-white rounded"
+              className="px-4 py-2 bg-blue-500 text-white rounded w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -195,19 +192,17 @@ const Cart = () => {
               <p className="font-semibold">Discount</p>
               <p>{discount}%</p>
             </div>
-            <div className="border-t pt-4 flex justify-between">
+            <div className="border-t pt-4 flex flex-col gap-2">
               <p className="font-semibold mb-2">Shipping</p>
-              <div className="flex flex-col gap-2">
-                <label className="flex items-center">
-                  <input type="radio" name="shipping" defaultChecked className="mr-2" /> Free Shipping
-                </label>
-                <label className="flex items-center">
-                  <input type="radio" name="shipping" className="mr-2" /> Flat Rate
-                </label>
-                <label className="flex items-center">
-                  <input type="radio" name="shipping" className="mr-2" /> Local Pickup
-                </label>
-              </div>
+              <label className="flex items-center">
+                <input type="radio" name="shipping" defaultChecked className="mr-2" /> Free Shipping
+              </label>
+              <label className="flex items-center">
+                <input type="radio" name="shipping" className="mr-2" /> Flat Rate
+              </label>
+              <label className="flex items-center">
+                <input type="radio" name="shipping" className="mr-2" /> Local Pickup
+              </label>
             </div>
             <div className="flex justify-between">
               <p className="font-semibold">Total</p>
