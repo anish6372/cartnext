@@ -10,6 +10,8 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.items);
   const discount = useSelector((state) => state.cart.discount);
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isPaymentSuccess, setIsPaymentSuccess] = useState(false); 
 
   const [tempCart, setTempCart] = useState([]);
 
@@ -48,9 +50,18 @@ const Cart = () => {
     dispatch(updateCart(tempCart));
   };
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-    setTempCart([]);
+  
+
+  const handleProceedToCheckout = () => {
+    setIsModalOpen(true); // Open the modal
+  };
+
+  const handlePayment = () => {
+    setIsPaymentSuccess(true); // Simulate payment success
+    setTimeout(() => {
+      setIsModalOpen(false); // Close the modal
+      router.push("/"); // Redirect to the home page
+    }, 2000); // Wait 2 seconds before redirecting
   };
 
   return (
@@ -238,12 +249,48 @@ const Cart = () => {
               className="w-full py-2 bg-red-500 text-white rounded"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleProceedToCheckout}
             >
               Proceed to Checkout
             </motion.button>
           </div>
         </motion.div>
       </motion.div>
+
+
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg w-11/12 sm:w-1/2">
+            {!isPaymentSuccess ? (
+              <>
+                <h2 className="text-xl font-bold mb-4">Payment Gateway</h2>
+                <p className="mb-4">Please confirm your payment details:</p>
+                <ul className="mb-4">
+                  {tempCart.map((item) => (
+                    <li key={item.id} className="flex justify-between">
+                      <span>{item.title}</span>
+                      <span>${(item.price * item.quantity).toFixed(2)}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="font-bold mb-4">Total: ${total.toFixed(2)}</p>
+                <button
+                  onClick={handlePayment} // Simulate payment
+                  className="px-4 py-2 bg-green-500 text-white rounded w-full"
+                >
+                  Pay Now
+                </button>
+              </>
+            ) : (
+              <div className="text-center">
+                <h2 className="text-xl font-bold mb-4">Payment Successful!</h2>
+                <p className="mb-4">Thank you for your purchase.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
