@@ -83,7 +83,7 @@ const ProductListing = () => {
             </select>
           </div>
 
-         
+          {/* Product Grid with Animation */}
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             initial={{ opacity: 0 }}
@@ -113,7 +113,7 @@ const ProductListing = () => {
             ))}
           </motion.div>
 
-          {/* Pagination Controls with Animation */}
+        
           <div className="flex justify-center mt-4">
             {Array.from({ length: totalPages }, (_, index) => (
               <motion.button
