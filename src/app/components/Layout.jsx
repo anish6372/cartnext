@@ -21,15 +21,18 @@ const Layout = ({ children }) => {
   const isCartPage = pathname === "/cart";
   const isProductDetailsPage = pathname.includes("/product");
   const [darkMode, setDarkMode] = useState(false);
+
+  
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
   return (
     <div className="bg-white text-black min-h-screen">
+        <div className="bg-white text-black min-h-screen">
       <header className="w-full shadow-md">
       
-        
+       
         <div className="bg-red-600 text-white text-xs sm:text-sm py-2 px-4 flex flex-wrap justify-between items-center">
           <div className="flex gap-2 sm:gap-4 flex-wrap justify-center sm:justify-start w-full sm:w-auto">
             <span>About</span>
@@ -45,7 +48,7 @@ const Layout = ({ children }) => {
           </div>
         </div>
 
-        
+      
         <div className="flex flex-wrap justify-between items-center p-4 bg-white">
           <h1 className="text-lg sm:text-xl font-bold text-red-600">ROISER</h1>
 
@@ -63,7 +66,7 @@ const Layout = ({ children }) => {
             </button>
           </div>
 
-        
+          
           <div className="flex items-center gap-4 sm:gap-6 mt-2 sm:mt-0 text-xs sm:text-sm">
             <div className="flex items-center gap-1 sm:gap-2">
               <FaPhoneAlt className="text-gray-500 text-sm sm:text-base" />
@@ -78,7 +81,7 @@ const Layout = ({ children }) => {
               <span className="font-bold">$1280.00</span>
             </div>
 
-           
+            
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded bg-gray-200 hover:bg-gray-300 transition"
@@ -88,7 +91,7 @@ const Layout = ({ children }) => {
           </div>
         </div>
 
-       
+        
         <nav className="bg-black text-white py-3">
           <div className="container mx-auto flex flex-wrap justify-between items-center px-4">
             <div className="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6 text-xs sm:text-base">
@@ -107,7 +110,7 @@ const Layout = ({ children }) => {
           </div>
         </nav>
 
-       
+        
         {(isCartPage || isProductDetailsPage) && (
           <section className={`py-10 sm:py-20 ${darkMode ? "bg-gray-900 text-white" : "bg-pink-100"}`}>
             <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-4 space-y-2 sm:space-y-0">
@@ -122,9 +125,110 @@ const Layout = ({ children }) => {
         )}
       </header>
 
+      
       <main className={`${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
         {children}
       </main>
+    </div>
+
+
+     
+      <footer className="bg-gray-100 text-gray-700 py-10 border-t w-full mt-12">
+        <div className="px-6 lg:px-20">
+         
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center pb-6 mb-6 bg-gray-200">
+            <div className="flex items-center space-x-2">
+              <FaShippingFast className="text-red-500 text-2xl" />
+              <div>
+                <h4 className="font-bold">Free Shipping</h4>
+                <p className="text-sm">Free shipping on orders over $65.</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <FaUndoAlt className="text-red-500 text-2xl" />
+              <div>
+                <h4 className="font-bold">Free Returns</h4>
+                <p className="text-sm">30-days free return policy.</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <FaLock className="text-red-500 text-2xl" />
+              <div>
+                <h4 className="font-bold">Secured Payments</h4>
+                <p className="text-sm">We accept all major credit cards.</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <FaHeadset className="text-red-500 text-2xl" />
+              <div>
+                <h4 className="font-bold">Customer Service</h4>
+                <p className="text-sm">Top-notch customer service.</p>
+              </div>
+            </div>
+          </div>
+
+         
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center md:text-left">
+            <div>
+              <h4 className="font-bold mb-3">About Store</h4>
+              <p className="text-red-500 font-bold text-lg">+258 3692 2569</p>
+              <p>Monday - Friday: 8:00am - 8:00pm</p>
+              <p>Saturday: 9:00am - 6:00pm</p>
+              <p>Sunday: Service Close</p>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-3">Shop Categories</h4>
+              <p>New Arrivals</p>
+              <p>Best Selling</p>
+              <p>Vegetables</p>
+              <p>Fresh Meat</p>
+              <p>Fresh Seafoods</p>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-3">Useful Links</h4>
+              <p>Privacy Policy</p>
+              <p>Terms & Conditions</p>
+              <p>Contact Us</p>
+              <p>Latest News</p>
+              <p>Our Sitemap</p>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-3">Our Newsletter</h4>
+              <p>Subscribe to receive updates on new arrivals and discounts.</p>
+              <div className="mt-3 flex">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="p-2 border border-gray-400 rounded-l-md flex-grow focus:outline-none"
+                />
+                <button className="bg-red-500 text-white px-4 py-2 rounded-r-md">
+                  SUBSCRIBE
+                </button>
+              </div>
+            </div>
+          </div>
+
+        
+          <div className="mt-8 text-center flex flex-col sm:flex-row justify-between border-t pt-4">
+            <div className="flex justify-center sm:justify-start items-center mb-4 sm:mb-0">
+              <p className="text-sm me-4">Payment System:</p>
+              <div className="flex space-x-2">
+                <FaCcVisa className="text-blue-600 text-2xl" />
+                <FaCcMastercard className="text-red-600 text-2xl" />
+                <FaCcPaypal className="text-blue-500 text-2xl" />
+                <FaCcAmex className="text-indigo-600 text-2xl" />
+              </div>
+            </div>
+
+            <div className="text-sm">
+              <p>Copyright © 2024 eStore. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
